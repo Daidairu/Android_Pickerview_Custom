@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="colorTransparent">#00000000</color>
+    <color name="colorMain">#084b87</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorRed">#ff0000</color>
+    <color name="colorPinkRed">#F07B8B</color>
+    <color name="colorBlue">#0000FF</color>
+    <color name="colorBlue2">#42cecc</color>
+    <color name="colorBlue3">#5ec7d1</color>
+
+    <color name="color_LightBlue">#0085c4</color>
+    <color name="colorYellow">#FFFF00</color>
+    <color name="colorYellow2">#fe8b0d</color><!-- 按鈕、區塊 -->
+    <color name="colorGreen_Background">#00A885</color>
+    <color name="colorOrange">#FC8B29</color>
+
+    <color name="colorGray_DarkMain">#dddddd</color><!-- 區塊 深灰 -->
+    <color name="colorGray_DarkBlock">#C9CACA</color><!-- 區塊 深灰 -->
+    <color name="colorGray_LightBlock">#CACACA</color><!-- 區塊 淺灰 --> <!--recyclerView 御用邊框顏色-->
+    <color name="colorGray_DarkText">#595757</color><!-- 文字 深灰 -->
+    <color name="colorGray_LightText">#888888</color><!-- 文字 淺灰 -->
+    <color name="colorGray_LightBackground">#EFEFEF</color><!-- 背景 淺灰 -->
+    <color name="colorGray_DarkStroke">#727171</color><!-- 邊框 深灰 -->
+    <color name="colorGray_LightStroke">#DCDDDD</color><!-- 邊框 淺灰 -->
+
+    <color name="colorGray_MainHeader">#f0f0f0</color><!-- Header 背景 -->
+    <color name="colorGray_MainHeaderText">#c0c0c0</color><!-- Header 文字-->
+    <color name="colorGray_ItemText">#292929</color><!-- Header 文字-->
+</resources>
