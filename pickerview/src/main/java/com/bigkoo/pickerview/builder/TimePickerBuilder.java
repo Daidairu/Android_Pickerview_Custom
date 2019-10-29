@@ -177,6 +177,15 @@ public class TimePickerBuilder {
 
 
     /**
+     * 設置時間間距(ex:5.10.15.20),只能選擇1-59，不符合都當作1 (不過濾)
+     * @param timeRange
+     */
+    public TimePickerBuilder setTimeRange(int timeRange) {
+        mPickerOptions.timeRange = timeRange;
+        return this;
+    }
+
+    /**
      * 设置间距倍数,但是只能在1.0-4.0f之间
      *
      * @param lineSpacingMultiplier

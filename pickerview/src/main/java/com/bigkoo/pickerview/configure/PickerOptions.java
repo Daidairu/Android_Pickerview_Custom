@@ -68,7 +68,16 @@ public class PickerOptions {
     public int x_offset_year, x_offset_month, x_offset_day, x_offset_hours, x_offset_minutes,
             x_offset_seconds;//单位
 
-    public boolean isShowWeekDay = true;/**我自己新增的 為了決定要不要顯示星期幾 操*/
+    /**
+     * 我自己新增的 為了決定要不要顯示星期幾 操
+     */
+    public boolean isShowWeekDay = false;
+
+    /**
+     * 我自己新增的 為了顯示過濾時間間距(EX:5.10.15.20) 操
+     */
+    public int timeRange = 1;
+
 
     public PickerOptions(int buildType) {
         if (buildType == TYPE_PICKER_OPTIONS) {

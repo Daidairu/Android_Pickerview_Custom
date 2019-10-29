@@ -89,7 +89,7 @@ public class TimePickerView extends BasePickerView implements View.OnClickListen
 
     private void initWheelTime(LinearLayout timePickerView) {
         wheelTime = new WheelTime(timePickerView, mPickerOptions.type, mPickerOptions.textGravity
-                , mPickerOptions.textSizeContent, mPickerOptions.isShowWeekDay);
+                , mPickerOptions.textSizeContent, mPickerOptions.isShowWeekDay,mPickerOptions.timeRange);
         if (mPickerOptions.timeSelectChangeListener != null) {
             wheelTime.setSelectChangeCallback(new ISelectTimeCallback() {
                 @Override
@@ -170,7 +170,6 @@ public class TimePickerView extends BasePickerView implements View.OnClickListen
     private void setRange() {
         wheelTime.setStartYear(mPickerOptions.startYear);
         wheelTime.setEndYear(mPickerOptions.endYear);
-
     }
 
     /**

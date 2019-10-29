@@ -349,6 +349,18 @@ public class WheelView extends View {
         return Math.max(0, Math.min(selectedItem, adapter.getItemsCount() - 1));
     }
 
+    /*自己寫的 寫給分鐘時間間距用的 這邊判斷是寫死最低0分最高59分*/
+    public final int getMinuteCurrentItem(int timeRange) {
+        // return selectedItem;
+        if (adapter == null) {
+            return 0;
+        }
+        if (isLoop && (selectedItem < 0 || selectedItem >= adapter.getItemsCount())) {
+            return Math.max(0, Math.min(Math.abs(Math.abs(selectedItem*timeRange) - 60), 60 - 1));
+        }
+        return Math.max(0, Math.min(selectedItem*timeRange, 60 - 1));
+    }
+
     public final void onItemSelected() {
         if (onItemSelectedListener != null) {
             postDelayed(new Runnable() {

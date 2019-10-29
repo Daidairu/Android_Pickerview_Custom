@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.bigkoo.pickerview.R;
 import com.bigkoo.pickerview.adapter.ArrayWheelAdapter;
 import com.bigkoo.pickerview.adapter.NumericWheelAdapter;
+import com.bigkoo.pickerview.adapter.TimeRangeWheelAdapter;
 import com.bigkoo.pickerview.adapter.WeekDaysWheelAdapter;
 import com.bigkoo.pickerview.listener.ISelectTimeCallback;
 import com.bigkoo.pickerview.utils.ChinaDate;
@@ -55,14 +56,17 @@ public class WheelTime {
     private ISelectTimeCallback mSelectChangeCallback;
 
     private boolean isShowWeekDay;
+    private int timeRange;
 
-    public WheelTime(View view, boolean[] type, int gravity, int textSize, boolean isShowWeekDay) {
+    public WheelTime(View view, boolean[] type, int gravity, int textSize, boolean isShowWeekDay,
+                     int timeRange) {
         super();
         this.view = view;
         this.type = type;
         this.gravity = gravity;
         this.textSize = textSize;
         this.isShowWeekDay = isShowWeekDay;
+        this.timeRange = timeRange;
     }
 
     public void setLunarMode(boolean isLunarCalendar) {
@@ -371,7 +375,7 @@ public class WheelTime {
         wv_hours.setGravity(gravity);
         //分
         wv_minutes = (WheelView) view.findViewById(R.id.min);
-        wv_minutes.setAdapter(new NumericWheelAdapter(0, 59));
+        setMinuteAdapter(0, 59);
 
         wv_minutes.setCurrentItem(m);
         wv_minutes.setGravity(gravity);
@@ -540,7 +544,17 @@ public class WheelTime {
         } else {
             wv_day.setAdapter(new NumericWheelAdapter(startDay, endDay));
         }
-        Log.e("isShowWeekDayAdapter",year+"/"+month+"/"+startDay+"/"+endDay);
+        Log.e("isShowWeekDayAdapter", year + "/" + month + "/" + startDay + "/" + endDay);
+    }
+
+    /**
+     * 決定要用有或沒有過濾時間間距的adapter,
+     * TimeRangeWheelAdapter是會依照 timeRange 過濾時間間距，我自己寫的垃圾，預設是1(不過濾)，範圍不在1-59也會當作1；
+     * NumericWheelAdapter是原生套件
+     */
+    private void setMinuteAdapter(int minValue, int maxValue) {
+//        wv_minutes.setAdapter(new NumericWheelAdapter(minValue, maxValue));//原生套件寫法
+        wv_minutes.setAdapter(new TimeRangeWheelAdapter(minValue, maxValue, timeRange)); //為了過濾時間寫法
     }
 
     private void setChangedListener(WheelView wheelView) {
@@ -563,14 +577,14 @@ public class WheelTime {
             if (endD > 31) {
                 endD = 31;
             }
-            isShowWeekDayAdapter(year_num, monthNum-1, startD, endD);
+            isShowWeekDayAdapter(year_num, monthNum - 1, startD, endD);
 
 //            maxItem = endD;
         } else if (list_little.contains(String.valueOf(monthNum))) {
             if (endD > 30) {
                 endD = 30;
             }
-            isShowWeekDayAdapter(year_num, monthNum-1, startD, endD);
+            isShowWeekDayAdapter(year_num, monthNum - 1, startD, endD);
 //            maxItem = endD;
         } else {
             if ((year_num % 4 == 0 && year_num % 100 != 0)
@@ -578,13 +592,13 @@ public class WheelTime {
                 if (endD > 29) {
                     endD = 29;
                 }
-                isShowWeekDayAdapter(year_num, monthNum-1, startD, endD);
+                isShowWeekDayAdapter(year_num, monthNum - 1, startD, endD);
 //                maxItem = endD;
             } else {
                 if (endD > 28) {
                     endD = 28;
                 }
-                isShowWeekDayAdapter(year_num, monthNum-1, startD, endD);
+                isShowWeekDayAdapter(year_num, monthNum - 1, startD, endD);
 //                maxItem = endD;
             }
         }
@@ -689,14 +703,14 @@ public class WheelTime {
                         .append((wv_month.getCurrentItem() + startMonth)).append("-")
                         .append((wv_day.getCurrentItem() + startDay)).append(" ")
                         .append(wv_hours.getCurrentItem()).append(":")
-                        .append(wv_minutes.getCurrentItem()).append(":")
+                        .append(wv_minutes.getMinuteCurrentItem(timeRange)).append(":")
                         .append(wv_seconds.getCurrentItem());
             } else {
                 sb.append((wv_year.getCurrentItem() + startYear)).append("-")
                         .append((wv_month.getCurrentItem() + startMonth)).append("-")
                         .append((wv_day.getCurrentItem() + 1)).append(" ")
                         .append(wv_hours.getCurrentItem()).append(":")
-                        .append(wv_minutes.getCurrentItem()).append(":")
+                        .append(wv_minutes.getMinuteCurrentItem(timeRange)).append(":")
                         .append(wv_seconds.getCurrentItem());
             }
 
@@ -705,7 +719,7 @@ public class WheelTime {
                     .append((wv_month.getCurrentItem() + 1)).append("-")
                     .append((wv_day.getCurrentItem() + 1)).append(" ")
                     .append(wv_hours.getCurrentItem()).append(":")
-                    .append(wv_minutes.getCurrentItem()).append(":")
+                    .append(wv_minutes.getMinuteCurrentItem(timeRange)).append(":")
                     .append(wv_seconds.getCurrentItem());
         }
 
